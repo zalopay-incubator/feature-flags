@@ -1,0 +1,32 @@
+{
+  "name": "unleash-docker",
+  "description": "Docker images for unleash.",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "lint": "eslint index.js",
+    "test": "mocha",
+    "test:ci": "echo 'no tests for unleash-docker';"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@exlinc/keycloak-passport": "^1.0.2",
+    "@passport-next/passport": "^3.1.0",
+    "@passport-next/passport-google-oauth2": "^1.0.0",
+    "basic-auth": "^2.0.1",
+    "passport": "^0.4.1",
+    "unleash-server": "^3.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.17.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.0"
+  }
+}
