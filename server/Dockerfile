@@ -1,10 +1,14 @@
 FROM node:12-alpine
 
-COPY package.json package-lock.json ./
+WORKDIR /src
+
+ADD package.json /src
+
+ADD package-lock.json /src
 
 RUN npm ci
 
-COPY . .
+ADD . /src
 
 EXPOSE 4242
 

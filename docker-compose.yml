@@ -5,10 +5,10 @@ services:
     ports:
       - "4242:4242"
     environment:
-      GOOGLE_CLIENT_ID: <your_google_client_id>
-      GOOGLE_CLIENT_SECRET: <your_google_client_secret>
-      GOOGLE_CALLBACK_URL: <your_google_callback_url>
-      WHITELISTED_DOMAIN: <your_whitelisted_domain>
+      GOOGLE_CLIENT_ID: 
+      GOOGLE_CLIENT_SECRET: 
+      GOOGLE_CALLBACK_URL: 
+      WHITELISTED_DOMAIN: 
       DATABASE_URL: postgres://postgres:unleash@db/postgres
     depends_on:
       - db
@@ -19,6 +19,9 @@ services:
           sleep 1
         done
         npm run start"
+    volumes:
+      - ./server:/src
+      
   db:
     expose:
       - "5432"
