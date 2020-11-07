@@ -1,6 +1,6 @@
 version: "3.3"
 services:
-  web:
+  server:
     build: ./server
     ports:
       - "4242:4242"
@@ -10,6 +10,9 @@ services:
       GOOGLE_CALLBACK_URL: 
       WHITELISTED_DOMAIN: 
       DATABASE_URL: postgres://postgres:unleash@db/postgres
+      UNLEASH_URL: "http://server:4242/api/"
+      UNLEASH_APP_NAME: "demo-feature-toggle"
+      UNLEASH_REFRESH_INTERVAL: 1000
     depends_on:
       - db
     command: >

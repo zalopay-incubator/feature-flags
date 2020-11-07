@@ -5,10 +5,11 @@ const unleash = require('unleash-server')
 const passport = require('@passport-next/passport')
 const GoogleOAuth2Strategy = require('@passport-next/passport-google-oauth2').Strategy
 const { initialize, isEnabled, getFeatureToggleDefinitions } = require('unleash-client')
-const instance = initialize({
-  url: "http://web:4242/api/",
-  appName: "demo-feature-toggle",
-  refreshInterval: 5000,
+
+initialize({
+  url: process.env.UNLEASH_URL,
+  appName: process.env.UNLEASH_APP_NAME,
+  refreshInterval: process.env.UNLEASH_REFRESH_INTERVAL,
 })
 
 const { User, AuthenticationRequired } = unleash
