@@ -4,31 +4,34 @@ const fs = require('fs')
 const unleash = require('unleash-server')
 const passport = require('@passport-next/passport')
 const GoogleOAuth2Strategy = require('@passport-next/passport-google-oauth2').Strategy
-const { initialize, isEnabled, getFeatureToggleDefinitions } = require('unleash-client')
+const { initialize } = require('unleash-client')
 
-initialize({
+const instance = initialize({
   url: process.env.UNLEASH_URL,
   appName: process.env.UNLEASH_APP_NAME,
   refreshInterval: process.env.UNLEASH_REFRESH_INTERVAL,
-})
+});
 
 const { User, AuthenticationRequired } = unleash
 
 function getFeatureToggle(context) {
   return (obj, feature) => {
-    obj[feature.name] = { 'isEnabled': isEnabled(feature.name, context) }
+    obj[feature.name] = {
+      'isEnabled': instance.isEnabled(feature.name, context)
+    }
     return obj
   }
 }
 
 function getAllFeatureToggles(context) {
-  const allFeatureToggles = getFeatureToggleDefinitions()
+  const allFeatureToggles = instance.getFeatureToggleDefinitions()
   return allFeatureToggles.reduce(getFeatureToggle(context), {})
 }
 
-function setUnleashContext(sessionId) {
+function setUnleashContext({ hostname, userId }) {
   const context = {
-    sessionId: sessionId
+    remoteAddress: hostname,
+    userId,
   }
   return context
 }
@@ -70,13 +73,9 @@ function enableGoogleOauth(app) {
   passport.deserializeUser((user, done) => done(null, user))
 
   app.get('/features', (req, res) => {
-    const sessionCookieName = "unleash_session_id"
-    let sessionId = req.cookies[sessionCookieName]
-    if (!sessionId) {
-      sessionId = + new Date()
-      res.cookie(sessionCookieName, sessionId)
-    }
-    const context = setUnleashContext(sessionId)
+    const hostname = req.headers.origin
+    const userId = req.query.uid
+    const context = setUnleashContext({ hostname, userId })
     res.send(getAllFeatureToggles(context))
   })
 
