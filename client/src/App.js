@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { Menu, Layout } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { showFeature } from './FeatureFlag';
-import FeatureFlagContext from './FeatureFlagContext';
+import { showFeature } from './FeatureFlag/FeatureFlag';
+import FeatureFlagContext from './FeatureFlag/FeatureFlagContext';
 
 const { SubMenu } = Menu;
 

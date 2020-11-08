@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import FeatureFlagContext from './FeatureFlagContext'
-import { getFeatures } from './utils'
+import { getFeatures } from '../utils'
 
 class FeatureFlagProvider extends Component {
   constructor() {

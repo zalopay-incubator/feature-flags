@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import FeatureFlagProvider from './FeatureFlagProvider';
+import FeatureFlagProvider from './FeatureFlag/FeatureFlagProvider';
 
 ReactDOM.render(
   <React.StrictMode>
